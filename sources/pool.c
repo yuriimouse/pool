@@ -1,4 +1,4 @@
-#include "pull.h"
+#include "pool.h"
 // #include <ctype.h>
 #include <errno.h>
 
@@ -65,11 +65,11 @@ char *entity_get(entity_attribute *list, const char *name)
  * @param list
  * @return int
  */
-int pull_add(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list)
+int pool_add(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list)
 {
     if (name && type && entity)
     {
-        if (pull_get(name))
+        if (pool_get(name))
         {
             errno = EEXIST;
             return 0;
@@ -100,7 +100,7 @@ int pull_add(const char *name, const char *type, void *entity, int (*destructor)
  * @param name
  * @return int
  */
-static int pull_destruct(pool_entity *record)
+static int pool_destruct(pool_entity *record)
 {
     return 0;
 }
@@ -111,7 +111,7 @@ static int pull_destruct(pool_entity *record)
  * @param name
  * @return char*
  */
-int pull_delete(const char *name)
+int pool_delete(const char *name)
 {
     return 0;
 }
@@ -122,7 +122,7 @@ int pull_delete(const char *name)
  * @param name
  * @return char*
  */
-int pull_destroy()
+int pool_destroy()
 {
 
     return 0;
@@ -138,7 +138,7 @@ int pull_destroy()
  * @param list
  * @return int
  */
-int pull_replace(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list)
+int pool_replace(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list)
 {
     return 0;
 }
@@ -149,7 +149,7 @@ int pull_replace(const char *name, const char *type, void *entity, int (*destruc
  * @param name
  * @return char*
  */
-pool_entity *pull_get(const char *name)
+pool_entity *pool_get(const char *name)
 {
     if (name)
     {

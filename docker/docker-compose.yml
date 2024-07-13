@@ -1,9 +1,9 @@
 services:
-  pull-lib:
-    container_name: pull
+  pool-lib:
+    container_name: pool
     build: .
     volumes:
-      - ../:/pull
+      - ../:/pool
     entrypoint: /bin/bash
     stdin_open: true
     tty: true

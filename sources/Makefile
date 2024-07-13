@@ -1,7 +1,7 @@
 VERSION = 2.1.1
 
 # # Library name
-LIB_NAME = pull
+LIB_NAME = pool
 # # Install path
 INSTALL_PATH = /usr/local/
 

@@ -56,7 +56,7 @@ typedef struct pool_entity
  * @param list
  * @return int
  */
-int pull_add(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list);
+int pool_add(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list);
 
 /**
  * Deregisters entity by name
@@ -64,7 +64,7 @@ int pull_add(const char *name, const char *type, void *entity, int (*destructor)
  * @param name
  * @return char*
  */
-int pull_delete(const char *name);
+int pool_delete(const char *name);
 
 /**
  * Replace an entity in the pool
@@ -76,7 +76,7 @@ int pull_delete(const char *name);
  * @param list
  * @return int
  */
-int pull_replace(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list);
+int pool_replace(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list);
 
 /**
  * Gets entity by name
@@ -84,7 +84,7 @@ int pull_replace(const char *name, const char *type, void *entity, int (*destruc
  * @param name
  * @return char*
  */
-pool_entity *pull_get(const char *name);
+pool_entity *pool_get(const char *name);
 
 /**
  * Gets the version
