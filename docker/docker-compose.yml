@@ -1,0 +1,9 @@
+services:
+  pull-lib:
+    container_name: pull
+    build: .
+    volumes:
+      - ../:/pull
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true
