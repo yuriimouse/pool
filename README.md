@@ -1,2 +1,2 @@
 # pull
-Self controlled list of named and typed different entities
+A self-monitored list of named typed entities
