@@ -12,39 +12,43 @@
 #define VERSION "0"
 #endif
 
-typedef struct entity_attribute
+#define FREE_AND_NULL(x) \
+    if (x)               \
+    {                    \
+        free(x);         \
+        x = NULL;        \
+    }
+
+typedef struct pool_attribute
 {
     char *name;
     char *value;
-    struct entity_attribute *next;
-} entity_attribute;
+    struct pool_attribute *next;
+} pool_attribute;
 
 /**
- * Entity attributes builder
+ * Pool attributes builder
  *
  * @param name
  * @param value
- * @return entity_attribute*
+ * @return pool_attribute*
  */
-entity_attribute *entity_set(entity_attribute *list, const char *name, const char *value);
+pool_attribute *pool_attributeSet(pool_attribute *list, const char *name, const char *value);
 
 /**
- * Gets entity attribute by name
+ * Gets pool attribute by name
  *
  * @param name
  * @return char*
  */
-char *entity_get(entity_attribute *list, const char *name);
+char *pool_attributeGet(pool_attribute *list, const char *name);
 
-typedef struct pool_entity
-{
-    char *name;
-    char *type;
-    void *entity;
-    int (*destructor)(void *);
-    entity_attribute *list;
-    pool_entity *next;
-} pool_entity;
+/**
+ * Destroy pool
+ *
+ * @param name
+ */
+void pool_destroy();
 
 /**
  * Registers an entity in the pool
@@ -56,27 +60,15 @@ typedef struct pool_entity
  * @param list
  * @return int
  */
-int pool_add(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list);
+int pool_add(const char *name, const char *type, void *entity, int (*destructor)(void *), pool_attribute *list);
 
 /**
- * Deregisters entity by name
+ * Gets entity type by name
  *
  * @param name
  * @return char*
  */
-int pool_delete(const char *name);
-
-/**
- * Replace an entity in the pool
- *
- * @param name
- * @param type
- * @param entity
- * @param destructor
- * @param list
- * @return int
- */
-int pool_replace(const char *name, const char *type, void *entity, int (*destructor)(void *), entity_attribute *list);
+char *pool_getType(const char *name);
 
 /**
  * Gets entity by name
@@ -84,12 +76,20 @@ int pool_replace(const char *name, const char *type, void *entity, int (*destruc
  * @param name
  * @return char*
  */
-pool_entity *pool_get(const char *name);
+void *pool_getEntity(const char *name);
+
+/**
+ * Gets entity attributes list by name
+ *
+ * @param name
+ * @return char*
+ */
+pool_attribute *pool_getAttributes(const char *name);
 
 /**
  * Gets the version
- * 
- * @return const char* 
+ *
+ * @return const char*
  */
 const char *pool_version();
 
