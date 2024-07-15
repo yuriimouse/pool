@@ -1,4 +1,4 @@
 cd ./docker
 docker compose up -d
-docker compose exec cidre-lib /bin/bash
+docker compose exec redisds-lib /bin/bash
 cd ..

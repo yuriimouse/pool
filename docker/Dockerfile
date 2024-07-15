@@ -12,6 +12,4 @@ RUN dnf install unittest* -y
 RUN dnf install git -y
 
 
-
-
 RUN export LD_LIBRARY_PATH=/usr/local/lib/
