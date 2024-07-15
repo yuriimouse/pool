@@ -1,9 +1,9 @@
 services:
-  redisds-lib:
-    container_name: redisds
+  pool-lib:
+    container_name: pool
     build: .
     volumes:
-      - ../:/redisds
+      - ../:/pool
     entrypoint: /bin/bash
     stdin_open: true
     tty: true

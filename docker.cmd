@@ -1,4 +1,4 @@
 cd ./docker
 docker compose up -d
-docker compose exec redisds-lib /bin/bash
+docker compose exec pool-lib /bin/bash
 cd ..
