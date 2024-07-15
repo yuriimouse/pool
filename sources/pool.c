@@ -1,5 +1,14 @@
+/**
+ * @file pool.c
+ * @author Yurii Prudius (yurii.prudius@gmail.com) [https://github.com/yuriimouse/pool]
+ * @brief A self-monitored list of named typed entities
+ * @version 2.1.1
+ * @date 2024-07-15
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "pool.h"
-// #include <ctype.h>
 #include <errno.h>
 
 typedef struct pool_entity
@@ -9,7 +18,7 @@ typedef struct pool_entity
     void *entity;
     int (*destructor)(void *);
     pool_attribute *list;
-    pool_entity *next;
+    struct pool_entity *next;
 } pool_entity;
 
 static pool_entity *_pool_ = NULL;
@@ -108,7 +117,6 @@ static pool_entity *entity_destruct(pool_entity *record)
  */
 void pool_destroy()
 {
-    pool_entity *ptr = NULL;
     for (pool_entity *ptr = _pool_; ptr;)
     {
         entity_destruct(ptr);
@@ -116,6 +124,30 @@ void pool_destroy()
         free(ptr);
         ptr = next;
     }
+}
+
+/**
+ * Gets entity by name
+ *
+ * @param name
+ * @return char*
+ */
+static pool_entity *pool_get(const char *name)
+{
+    if (name)
+    {
+        pool_entity *ptr = NULL;
+        for (ptr = _pool_; ptr; ptr = ptr->next)
+        {
+            if (!strcmp(name, ptr->name))
+            {
+                break;
+            }
+        }
+        return ptr;
+    }
+    errno = EINVAL;
+    return NULL;
 }
 
 /**
@@ -155,30 +187,6 @@ int pool_add(const char *name, const char *type, void *entity, int (*destructor)
     }
     errno = EINVAL;
     return 0;
-}
-
-/**
- * Gets entity by name
- *
- * @param name
- * @return char*
- */
-static pool_entity *pool_get(const char *name)
-{
-    if (name)
-    {
-        pool_attribute *ptr = NULL;
-        for (ptr = _pool_; ptr; ptr = ptr->next)
-        {
-            if (!strcmp(name, ptr->name))
-            {
-                break;
-            }
-        }
-        return ptr;
-    }
-    errno = EINVAL;
-    return NULL;
 }
 
 /**
