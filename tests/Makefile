@@ -1,11 +1,11 @@
-VERSION = 2.1.1
+VERSION = 2.2.1
 
 CC = gcc
 CFLAGS = -fPIC -Wall -Wextra -O2 -g -std=gnu99 -DVERSION=\"$(VERSION)\" -I$(INSTALL_PATH) -I/usr/include 
 LDFLAGS = -fpie -L$(LIB_PATH)lib/
 
-S_LIBS = -Wl,-Bstatic -lcunit -lpool
-D_LIBS = -Wl,-Bdynamic -lpthread -lresolv
+S_LIBS = -Wl,-Bstatic -L/usr/lib64 -lcunit -lpool
+D_LIBS = -Wl,-Bdynamic -L/usr/lib64 -lpthread -lresolv -lcjson
 TARGET_BIN = unitTest
 
 .PHONY: default

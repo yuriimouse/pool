@@ -11,10 +11,7 @@
 #include <pool/pool.h>
 
 extern CU_TestInfo testing_attributes[];
-// extern CU_TestInfo testing_pool_string[];
-// extern CU_TestInfo testing_pool_address[];
-// extern CU_TestInfo testing_pool_mask[];
-// extern CU_TestInfo testing_pool_contains[];
+extern CU_TestInfo testing_pool[];
 
 static int checkError(CU_ErrorCode error)
 {
@@ -42,10 +39,7 @@ int main(int argc, char *argv[])
             {
                 // suite name, init, clean, NULL, NULL, array of tests
                 {"[testing_attributes]", NULL, NULL, NULL, NULL, testing_attributes},
-                // {"[pool_string]", NULL, NULL, NULL, NULL, testing_pool_string},
-                // {"[pool_address]", NULL, NULL, NULL, NULL, testing_pool_address},
-                // {"[pool_mask]", NULL, NULL, NULL, NULL, testing_pool_mask},
-                // {"[pool_contains]", NULL, NULL, NULL, NULL, testing_pool_contains},
+                {"[testing_pool]", NULL, NULL, NULL, NULL, testing_pool},
                 CU_SUITE_INFO_NULL,
             };
 
