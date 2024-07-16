@@ -7,7 +7,9 @@ RUN dnf install epel-release -y
 RUN dnf install make -y
 RUN dnf install findutils -y
 # unittest
+RUN dnf install libtool -y
 RUN dnf install unittest* -y
+# RUN dnf install valgrind -y
 # git
 RUN dnf install git -y
 
