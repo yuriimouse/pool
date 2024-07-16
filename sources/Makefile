@@ -13,7 +13,6 @@ STATIC_LIB = lib$(LIB_NAME).a
 TARGET_LIB = lib$(LIB_NAME).so
 
 .DEFAULT_GOAL := default
-
 default: all clean
 
 .PHONY: all
@@ -40,6 +39,7 @@ install: all copy clean
 copy:
 	/bin/mkdir -p $(INSTALL_PATH)include/$(LIB_NAME)/
 	cp -f *.h $(INSTALL_PATH)include/$(LIB_NAME)/
+	/bin/mkdir -p $(INSTALL_PATH)lib
 	cp -f $(TARGET_LIB) $(INSTALL_PATH)lib/
 	cp -f $(STATIC_LIB) $(INSTALL_PATH)lib/
 
