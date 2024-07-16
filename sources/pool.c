@@ -1,8 +1,8 @@
 /**
  * @file pool.c
  * @author Yurii Prudius (yurii.prudius@gmail.com) [https://github.com/yuriimouse/pool]
- * @brief A self-monitored list of named typed entities
- * @version 2.1.1
+ * @brief An automatically managed list of named typed entities
+ * @version 2.2.1
  * @date 2024-07-15
  * 
  * @copyright Copyright (c) 2024
@@ -16,7 +16,7 @@ typedef struct pool_entity
     char *name;
     char *type;
     void *entity;
-    int (*destructor)(void *);
+    void (*destructor)(void *);
     pool_attribute *list;
     struct pool_entity *next;
 } pool_entity;
@@ -160,7 +160,7 @@ static pool_entity *pool_get(const char *name)
  * @param list
  * @return int
  */
-int pool_add(const char *name, const char *type, void *entity, int (*destructor)(void *), pool_attribute *list)
+int pool_add(const char *name, const char *type, void *entity, void (*destructor)(void *), pool_attribute *list)
 {
     if (name && type && entity)
     {

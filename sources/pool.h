@@ -60,7 +60,7 @@ void pool_destroy();
  * @param list
  * @return int
  */
-int pool_add(const char *name, const char *type, void *entity, int (*destructor)(void *), pool_attribute *list);
+int pool_add(const char *name, const char *type, void *entity, void (*destructor)(void *), pool_attribute *list);
 
 /**
  * Gets entity type by name
@@ -74,17 +74,27 @@ char *pool_getType(const char *name);
  * Gets entity by name
  *
  * @param name
- * @return char*
+ * @return void*
  */
 void *pool_getEntity(const char *name);
 
 /**
- * Gets entity attributes list by name
+ * Gets the entity attributes list by name
  *
  * @param name
- * @return char*
+ * @return pool_attribute*
  */
 pool_attribute *pool_getAttributes(const char *name);
+
+/**
+ * A macro for iterating over a list of attributes
+ */
+#define pool_attributesForeach(element, list) for (pool_attribute *element = (list != NULL) ? list : NULL; element != NULL; element = element->next)
+
+/**
+ * A macro for get the attribute by entity name and attribute name
+ */
+#define pool_getAttributeByName(entity_name, attr_name) pool_attributeGet(pool_getAttributes(entity_name), attr_name)
 
 /**
  * Gets the version
