@@ -12,6 +12,8 @@ RUN dnf install unittest* -y
 # RUN dnf install valgrind -y
 # git
 RUN dnf install git -y
+#
+RUN dnf install cjson* -y
 
 
 RUN export LD_LIBRARY_PATH=/usr/local/lib/
