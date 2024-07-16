@@ -32,7 +32,7 @@ static void test_attributes(void)
         FREE_AND_NULL(key);
         FREE_AND_NULL(value);
     }
-    FINISH_USING_TEST_DATA;
+    FINISH_USING_TEST_DATA
 
     // check
     START_USING_TEST_DATA("data/")
